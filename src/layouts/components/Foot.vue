@@ -5,7 +5,7 @@
 				<div>
 					© 2021 leitingting08&emsp;&emsp;
 					<a href="https://github.com/leitingting08" target="_blank">Profile</a>&emsp;&emsp;
-					<a href="https://github.com/leitingting08/vblog" target="_blank">VBlog</a>
+					<a href="https://github.com/leitingting08/gridsome-blog" target="_blank">Blog</a>
 				</div>
 			</el-col>
 			<el-col :span="4">
