@@ -5,19 +5,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'Gridsome',
-  plugins: [
-    {
-      use: '@gridsome/source-filesystem',
-      options: {
-        typeName: 'BlogPost',
-        path: './content/blog/**/*.md'
-      }
-    }
-  ],
-  transformers: {
-    remark: {
-      
-    }
-  }
+  siteName: 'Gridsome Blog',
+  siteUrl: 'https://leitingting08.github.io',
+  pathPrefix: '/gridsome-blog',
 }
