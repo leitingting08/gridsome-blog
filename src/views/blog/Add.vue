@@ -1,4 +1,5 @@
 <template>
+  <Layout>
     <div style="min-height: 600px">
         <el-card shadow="never" style="margin-bottom: 20px">
             <el-form ref="form" :model="form" label-width="80px" :rules="ruleValidate">
@@ -9,8 +10,9 @@
                     <el-input v-model="form.description" type="textarea"></el-input>
                 </el-form-item>
                 <el-form-item label="博客正文" prop="content">
+                    <client-only>
                     <mavon-editor @imgAdd="imgAdd" style="max-height: 500px" ref="md" v-model="form.content" :subfield="false" :toolbars="mavonEditorToolbars"
-                    />
+                    /></client-only>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit" :loading="submitButton.loading" :disabled="submitButton.disabled">发表</el-button>
@@ -20,6 +22,7 @@
         </el-card>
         <token-dialog ref="tokenDialog"></token-dialog>
     </div>
+  </Layout>
 </template>
 <script>
     import { mapGetters } from 'vuex'

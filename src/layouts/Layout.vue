@@ -47,10 +47,10 @@
                                 </el-popover>
                             </el-col>
                             <el-col :span="14" style="padding-left: 20px">
-                                <el-slider @change="changeTime" :format-tooltip="$util.formatTime" :max="music.maxTime" v-model="music.currentTime" style="width: 100%;"></el-slider>
+                                <el-slider @change="changeTime" :format-tooltip="forTip" :max="music.maxTime" v-model="music.currentTime" style="width: 100%;"></el-slider>
                             </el-col>
                             <el-col :span="6" style="padding: 9px 0px 0px 10px;color:#909399;font-size: 13px">
-                                {{$util.formatTime(music.currentTime)}}/{{$util.formatTime(music.maxTime)}}
+                                <span v-if="dur">{{dur}}</span>
                             </el-col>
                         </el-row>
 
@@ -91,7 +91,9 @@
                     <sidebar></sidebar>
                 </el-col>
                 <el-col :span="18" style="padding-left:10px">
-                    <app-main></app-main>
+                  <transition name="fade">
+                    <slot/>
+                  </transition>
                 </el-col>
             </el-row>
 
@@ -106,12 +108,10 @@
 <script>
     import { mapGetters } from 'vuex'
     import Sidebar from './components/Sidebar'
-    import AppMain from './components/AppMain'
     import Foot from './components/Foot'
     export default {
         components: {
             Sidebar,
-            AppMain,
             Foot
         },
         data() {
@@ -152,7 +152,13 @@
                 'followingTotal',
                 'audioAutoPlay',
                 'webSites'
-            ])
+            ]),
+            dur() {
+              return this.$util && this.$util.formatTime(music.currentTime)/this.$util.formatTime(music.maxTime)
+            },
+            forTip() {
+              return this.$util && this.$util.formatTime
+            }
         },
         watch: {
             '$refs.music.currentTime': function () {
@@ -160,6 +166,17 @@
             }
         },
         mounted() {
+            // this.$store.dispatch("Init")
+            // this.$store.dispatch("GetInfo")
+            // this.$setTitle(this.$route.meta.title)
+            let windowSize = this.$util.getWindowSize()
+            let pathArr = this.$route.path.split("/")
+            if (pathArr[1] == "user" && windowSize.height > windowSize.width * 1.2) {
+                this.$router.push("/mobile/user/blog/main")
+            }
+            if (pathArr[1] == "mobile" && windowSize.height <= windowSize.width * 1.2) {
+                this.$router.push("/")
+            }
             this.$nextTick(() => {
                 setInterval(this.listenMusic, 1000)
             })
@@ -175,19 +192,6 @@
                 temp["size"] = this.$util.randomInt(20, 40)
                 this.randomIcon.push(temp)
             }
-        },
-        created() {
-          this.$store.dispatch("Init")
-          this.$store.dispatch("GetInfo")
-          this.$setTitle(this.$route.meta.title)
-          let windowSize = this.$util.getWindowSize()
-          let pathArr = this.$route.path.split("/")
-          if (pathArr[1] == "user" && windowSize.height > windowSize.width * 1.2) {
-              this.$router.push("/mobile/user/blog")
-          }
-          if (pathArr[1] == "mobile" && windowSize.height <= windowSize.width * 1.2) {
-              this.$router.push("/")
-          }
         },
         methods: {
             defImg(e){
@@ -279,6 +283,15 @@
 </script>
 
 <style>
+   .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity .2s;
+    }
+
+    .fade-enter,
+    .fade-leave-to {
+      opacity: 0;
+    }
     .page-header {
         padding: 5rem 6rem;
         color: #fff;

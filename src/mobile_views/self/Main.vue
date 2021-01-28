@@ -39,7 +39,7 @@
     export default {
         data() {
             return {
-                windowSize: this.$util.getWindowSize()
+                windowSize: 0
             }
         },
         computed: {
@@ -54,10 +54,7 @@
             ])
         },
         mounted() {
-            // this.$toast({
-            //     message: '移动端开发中... 请在电脑上查看',
-            //     duration: 5000
-            // })
+          this.windowSize = this?.$util?.getWindowSize()
         },
         methods: {
 

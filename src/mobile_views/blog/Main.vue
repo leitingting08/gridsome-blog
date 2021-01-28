@@ -20,7 +20,7 @@
     export default {
         data() {
             return {
-                windowSize: this.$util.getWindowSize(),
+                windowSize: 0,
                 query: {
                     page: 1,
                     pageSize: 20,
@@ -31,7 +31,7 @@
             }
         },
         mounted() {
-
+            this.windowSize = this?.$util?.getWindowSize()
             this.list()
         },
         methods: {

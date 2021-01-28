@@ -1,23 +1,31 @@
 <template>
     <div>
-        <app-main></app-main>
+        <transition name="fade">
+          <slot/>
+        </transition>
         <bottombar style="position:fixed;bottom:0;"></bottombar>
     </div>
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
     import Bottombar from './components/Bottombar'
-    import AppMain from './components/AppMain'
     export default {
         components: {
-            Bottombar,
-            AppMain
+            Bottombar
         },
     }
 </script>
 
 <style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .2s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 .mobile-border{
     border-top:1px solid #E4E7ED;
     border-bottom:1px solid #E4E7ED;

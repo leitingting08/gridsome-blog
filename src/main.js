@@ -15,7 +15,8 @@ import 'vant/lib/index.css'
 import DefaultLayout from '~/layouts/Layout.vue'
 import MobileLayout from '~/mobile_views/layout/Layout.vue'
 
-// store.dispatch("Init")
+store.dispatch("Init")
+store.dispatch("GetInfo")
 
 export default function (Vue, { appOptions, router, head, isClient }) {
   Vue.use(Vant)
@@ -82,8 +83,10 @@ export default function (Vue, { appOptions, router, head, isClient }) {
           })
       }
   }
-
-  Vue.prototype.$util = util
+  if (typeof window !== 'undefined') {
+    Vue.prototype.$util = util
+  }
+  
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
   Vue.component('MobileLayout', MobileLayout)

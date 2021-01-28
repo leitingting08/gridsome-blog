@@ -1,4 +1,5 @@
 <template>
+  <Layout>
     <div style="min-height: 600px" v-loading="loading">
         <el-card shadow="never" style="margin-bottom: 20px">
             <el-form ref="form" :model="form" label-width="80px" :rules="ruleValidate">
@@ -20,6 +21,7 @@
         </el-card>
         <token-dialog ref="tokenDialog"></token-dialog>
     </div>
+  </Layout>
 </template>
 <script>
     import { mapGetters } from 'vuex'
