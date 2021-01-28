@@ -5,20 +5,20 @@ export default {
     getBlogReadme: function () {
         let githubUsername = store.state.configuration.githubUsername
         return request({
-            url: '/repos/' + githubUsername + '/' + githubUsername + '.github.io/contents/README.md'
+            url: '/repos/' + githubUsername + '/' + githubUsername + '.github.io/gridsome-blog/README.md'
         })
     },
     getBlogConfigure: function () {
         let githubUsername = store.state.configuration.githubUsername
         return request({
-            url: '/repos/' + githubUsername + '/' + githubUsername + '.github.io/contents/static/configuration.json'
+            url: '/repos/' + githubUsername + '/' + githubUsername + '.github.io/gridsome-blog/static/configuration.json'
         })
     },
     editBlogConfigure: function (configure, sha) {
         let content = JSON.stringify(configure)
         let githubUsername = store.state.configuration.githubUsername
         return request({
-            url: '/repos/' + githubUsername + '/' + githubUsername + '.github.io/contents/static/configuration.json',
+            url: '/repos/' + githubUsername + '/' + githubUsername + '.github.io/gridsome-blog/static/configuration.json',
             method: 'PUT',
             data: {
                 "message": "a",
@@ -42,7 +42,7 @@ export default {
                 url: '/repos/' + githubUsername + '/' + name
             }).then((response) => {
                 request({
-                    url: '/repos/' + githubUsername + '/' + name + '/contents/README.md'
+                    url: '/repos/' + githubUsername + '/' + name + '/gridsome-blog/README.md'
                 }).then((sr) => {
                     response.data['readme_content'] = sr.data['content']
                     resolve(response)

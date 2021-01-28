@@ -154,7 +154,7 @@
                 'webSites'
             ]),
             dur() {
-              return this.$util && this.$util.formatTime(music.currentTime)/this.$util.formatTime(music.maxTime)
+              return this.$util && this.$util.formatTime(this.music.currentTime)/this.$util.formatTime(this.music.maxTime)
             },
             forTip() {
               return this.$util && this.$util.formatTime
@@ -165,7 +165,7 @@
                 console.log(this.$refs.music.currentTime)
             }
         },
-        mounted() {
+        created() {
             // this.$store.dispatch("Init")
             // this.$store.dispatch("GetInfo")
             // this.$setTitle(this.$route.meta.title)
@@ -177,6 +177,9 @@
             if (pathArr[1] == "mobile" && windowSize.height <= windowSize.width * 1.2) {
                 this.$router.push("/")
             }
+        },
+        mounted() {
+            
             this.$nextTick(() => {
                 setInterval(this.listenMusic, 1000)
             })
